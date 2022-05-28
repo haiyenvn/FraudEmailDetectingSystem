@@ -1,0 +1,31 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: model-fraud-detection
+on: [push]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: iterative/setup-cml@v1
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+#       - name: Train model
+#         env:
+#           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         run: |         
+#           python3 train.py
+       - name: Start Streamlit app
+         run: |
+           streamlit run model_deployment.py
+        - name: Test with unit test
+         run: |
+            python3 -m unittest unit-test.py
