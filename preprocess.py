@@ -5,7 +5,6 @@ import nltk
 from nltk.corpus import wordnet 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from spellchecker import SpellChecker
 
 def cleanText(text):
     text = BeautifulSoup(text, "html.parser").text
