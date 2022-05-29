@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          python -m nltk.downloader punkt stopwords
+          python3 -m nltk.downloader punkt stopwords wordnet
       - name: Train model
         run: |
           python3 train.py
